@@ -64,7 +64,15 @@
 
 /* Custom utility classes */
 .fade-layer {
+  
   /* Creates a vertical mask (fade effect on top and bottom) */
+  -webkit-mask-image:linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0)
+  );
   mask-image: linear-gradient(
     to top,
     rgba(0, 0, 0, 0),
@@ -76,6 +84,13 @@
 
 .fade-layer--side {
   /* Creates a horizontal mask (fade effect on the left and right) */
+  -webkit-mask-image: linear-gradient(
+    to left,
+    rgba(0,0,0,0),
+    rgba(0,0,0,1) 20%,
+    rgba(0,0,0,1) 80%,
+    rgba(0,0,0,0) 
+  );
   mask-image: linear-gradient(
     to left,
     rgba(0, 0, 0, 0),
