@@ -3,127 +3,140 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 generator client {
-  provider = "postgresql"
+  provider = "prisma-client-js"
   // output   = "../src/generated/prisma"
 }
+
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
+
 model User {
-  Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid 
-  email String  @unique
-  firstname String?
-  lastname String?
-  clerkId String  @unique
-  image String?
-  createdAt DateTime @default(now())
-  UpdatedAt DateTime @updatedAt
-  studio Media?
-  workspaces WorkSpace[]
-  Video Video[]
+  Id           String         @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  email        String         @unique
+  firstname    String?
+  lastname     String?
+  clerkId      String         @unique
+  image        String?
+  createdAt    DateTime       @default(now())
+  UpdatedAt    DateTime       @updatedAt
+  studio       Media?
+  workspaces   WorkSpace[]
+  Video        Video[]
   Subscription Subscription?
-  member Member[]
+  member       Member[]
   notification Notification[]
-  Sender Invite[] @relation("Sender")
-  Reciever Invite[] @relation("Reciever")
-  trial Boolean @default(false)
- }
-enum PRESET{
-  HD 
+  Sender       Invite[]       @relation("Sender")
+  Reciever     Invite[]       @relation("Reciever")
+  trial        Boolean        @default(false)
+}
+
+enum PRESET {
+  HD
   SD
 }
-model Media{
-  mediaId String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-  Screen String?
-  mic String?
-  camera String?
-  preset PRESET @default(SD)
-  userId String? @unique @db.Uuid
-  user User? @relation(fields:[userId] , references:[Id])
+
+model Media {
+  mediaId String  @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  Screen  String?
+  mic     String?
+  camera  String?
+  preset  PRESET  @default(SD)
+  userId  String? @unique @db.Uuid
+  user    User?   @relation(fields: [userId], references: [Id])
 }
-enum Type{
+
+enum Type {
   PERSONAL
   PRIVATE
 }
-model WorkSpace{
-  Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-  name String 
-  type Type
+
+model WorkSpace {
+  Id     String  @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  name   String
+  type   Type
   userId String? @db.Uuid
-  User User? @relation(fields:[userId],references:[Id])
+  User   User?   @relation(fields: [userId], references: [Id])
 
   folder Folder[]
-  Video Video[]
+  Video  Video[]
   member Member[]
-  Invite  Invite[]
+  Invite Invite[]
 }
-model Video{
-  Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-  title String @default("Untitled Video")
-  description String @default("No Description")
+
+model Video {
+  Id          String   @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  title       String   @default("Untitled Video")
+  description String   @default("No Description")
   //The location or path of the video file (e.g., a file path or URL). The @unique attribute ensures no two videos can share the same source value.
-  source String @unique
-  createdAt DateTime @default(now())
+  source      String   @unique
+  createdAt   DateTime @default(now())
 
   folderId String? @db.Uuid
-  folder Folder? @relation(fields:[folderId],references:[Id],onDelete:Cascade)
+  folder   Folder? @relation(fields: [folderId], references: [Id], onDelete: Cascade)
   //This critical referential action means that if the parent Folder is deleted, this associated Video record will automatically be deleted by the database.
 
-  userId String?  @db.Uuid
-  User User? @relation(fields:[userId],references:[Id],onDelete:Cascade)
-  
-  workspaceId String? @db.Uuid
-  WorkSpace WorkSpace? @relation(fields:[workspaceId],references:[Id],onDelete:Cascade)
-   
-  processing Boolean @default(true) 
-  views Int @default(0)
-  summary String? 
+  userId String? @db.Uuid
+  User   User?   @relation(fields: [userId], references: [Id], onDelete: Cascade)
+
+  workspaceId String?    @db.Uuid
+  WorkSpace   WorkSpace? @relation(fields: [workspaceId], references: [Id], onDelete: Cascade)
+
+  processing Boolean @default(true)
+  views      Int     @default(0)
+  summary    String?
 }
-model Folder{
-   Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-   title String @default("New Folder")
-   createdAt DateTime @default(now())
-   WorkSpace WorkSpace? @relation(fields:[workspaceId],references:[Id])
-   workspaceId String? @db.Uuid
-   videos Video[]
+
+model Folder {
+  Id          String     @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  title       String     @default("New Folder")
+  createdAt   DateTime   @default(now())
+  WorkSpace   WorkSpace? @relation(fields: [workspaceId], references: [Id])
+  workspaceId String?    @db.Uuid
+  videos      Video[]
 }
-model Subscription{
-Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-userId String? @unique @db.Uuid
-user User? @relation(fields:[userId],references:[Id])
-createdAt DateTime @default(now())
-UpdatedAt DateTime @default(now())
-plan Subscription_Plan @default(FREE)
-CustomerId String? @unique
+
+model Subscription {
+  Id         String            @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  userId     String?           @unique @db.Uuid
+  user       User?             @relation(fields: [userId], references: [Id])
+  createdAt  DateTime          @default(now())
+  UpdatedAt  DateTime          @default(now())
+  plan       Subscription_Plan @default(FREE)
+  CustomerId String?           @unique
 }
-enum Subscription_Plan{
- FREE 
- PRO
+
+enum Subscription_Plan {
+  FREE
+  PRO
 }
-model Member{
-  Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-  userId String @db.Uuid
-  User User? @relation(fields:[userId],references:[Id]) 
-  createdAt DateTime @default(now())
-  member Boolean @default(true)
-  workspaceId String @db.Uuid
-  WorkSpace WorkSpace? @relation(fields:[workspaceId],references:[Id]) 
+
+model Member {
+  Id          String     @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  userId      String     @db.Uuid
+  User        User?      @relation(fields: [userId], references: [Id])
+  createdAt   DateTime   @default(now())
+  member      Boolean    @default(true)
+  workspaceId String     @db.Uuid
+  WorkSpace   WorkSpace? @relation(fields: [workspaceId], references: [Id])
 }
-model Notification{
-  Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-  userId String @unique @db.Uuid
-  User User @relation(fields:[userId],references:[Id])
-  content String 
+
+model Notification {
+  Id      String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  userId  String @unique @db.Uuid
+  User    User   @relation(fields: [userId], references: [Id])
+  content String
 }
-model Invite{
-  Id String @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
-  senderId String? @db.Uuid 
-  Sender User? @relation("Sender",fields:[senderId],references:[Id])
-  recieverId String? @db.Uuid
-  Reciever User? @relation("Reciever",fields:[recieverId],references:[Id])
-  Content String 
-  WorkSpace WorkSpace? @relation(fields:[workspaceId],references:[Id])
-  workspaceId String? @db.Uuid
-  accepted Boolean @default(false)
+
+model Invite {
+  Id          String     @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
+  senderId    String?    @db.Uuid
+  Sender      User?      @relation("Sender", fields: [senderId], references: [Id])
+  recieverId  String?    @db.Uuid
+  Reciever    User?      @relation("Reciever", fields: [recieverId], references: [Id])
+  Content     String
+  WorkSpace   WorkSpace? @relation(fields: [workspaceId], references: [Id])
+  workspaceId String?    @db.Uuid
+  accepted    Boolean    @default(false)
 }
