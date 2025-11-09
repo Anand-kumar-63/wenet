@@ -2,24 +2,18 @@ import React from 'react'
 import onauthentication from '@/actions/user';
 import { redirect } from 'next/navigation';
 type props = {}
-const dashboardpage = (props:props) => {
-    
-    // authentication part has been done before
-    // const auth = await onauthentication();
-
-    // // if the account doesnot exist 
-    // if(auth?.status == 201 || auth?.status==201){
-    // return redirect(`/dashboard/${auth.user?.fisrtname}||${auth.user?.lastname}`)}
-
-
-
-
-
-
-
+const dashboardpage = async (props:props) => {
+  const auth = await onauthentication();
+  if(auth?.status==201||auth?.status==200){
+    return redirect(`/dashboard/${auth.user?.firstname}${auth.user?.lastname}}`)
+  }
+  else if(auth?.status==400 || auth?.status==404){
+    return redirect("/auth/sign-in");
+  }
   return (
-    <div></div>
+    <div>
+      dashboard
+    </div>
   )
 }
-
 export default dashboardpage
