@@ -6,7 +6,7 @@ const client = new PrismaClient();
 const onauthentication = async () => {
   try {
     const user = await currentUser();
-    if (!user) {
+    if(!user) {
       return { status: 400 };
     }
     const Existinguser = await client.user.findUnique({
