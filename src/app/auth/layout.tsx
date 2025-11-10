@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 
 type layoutprops = {
-    child:React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-const layout = ({child}:layoutprops) => {
+const layout = ({ children }: layoutprops) => {
   return (
-    <div className='w-full h-screen flex container'>
-        {child}
+    <div className="w-full h-screen bg-gray-900 flex justify-center items-center">
+      {children}
     </div>
-  )
-}
-export default layout
+  );
+};
+export default layout;

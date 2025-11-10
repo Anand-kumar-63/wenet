@@ -1,8 +1,9 @@
 import React from "react";
-import { SignIn } from "@clerk/nextjs";
+import { SignIn, useUser } from "@clerk/nextjs";
 const page = () => {
+//   const { isSignedIn } = useUser();
   return (
-    <div>
+    <div className="">
       <SignIn />
     </div>
   );

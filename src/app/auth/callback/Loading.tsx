@@ -1,9 +1,9 @@
 import React from 'react'
 import Spinner from '@/components/ui/global/Spinner'
 const Loading = () => {
-  const Colordsdfkcj = ""
+  const Colordsdfkcj = "";
   return (
-    <div>
+    <div className='flex h-screen flex justify-center items-center'>
         <Spinner color={Colordsdfkcj}/>
     </div>
   )

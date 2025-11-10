@@ -58,7 +58,6 @@ model WorkSpace {
   type   Type
   userId String? @db.Uuid
   User   User?   @relation(fields: [userId], references: [Id])
-
   folder Folder[]
   Video  Video[]
   member Member[]
