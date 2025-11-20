@@ -45,7 +45,6 @@ export const allowaccessworkspace = async ({ workspaceId }: workspaceprops) => {
     return { status: 401, data: { workspace: null } };
   }
 };
-
 export const getworkspacefolders = async (workspaceId: string) => {
   const user = await currentUser();
   if (!user) {
@@ -54,7 +53,7 @@ export const getworkspacefolders = async (workspaceId: string) => {
   try {
     const isFolders = await prismaclient.folder.findMany({
       where: {
-        workspaceId,
+        workspaceId: workspaceId,
       },
       include: {
         _count: {
@@ -89,6 +88,22 @@ export const getAlluserVideos = async (workspaceId: string) => {
         createdAt: true,
         description: true,
         source: true,
+        folder: {
+          select: {
+            Id: true,
+            title: true,
+          },
+        },
+        User: {
+          select: {
+            firstname: true,
+            lastname: true,
+            image: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
     if (!isVideos) {
@@ -96,7 +111,7 @@ export const getAlluserVideos = async (workspaceId: string) => {
     }
     return { status: 200, Videos: isVideos };
   } catch (error) {
-    return { status: 401, Videos: [] };
+    return { status: 500, Videos: [] };
   }
 };
 
@@ -141,7 +156,7 @@ export const getworkspace = async () => {
     }
     return { status: 200, data: isWorkspace };
   } catch (error) {
-    return { status: 400, data: {} };
+    return { status: 500, data: {} };
   }
 };
 
@@ -164,10 +179,11 @@ export const getNotifications = async () => {
         },
       },
     });
-    if (isNotifications && isNotifications.notification.length>0) {
+    if (isNotifications && isNotifications.notification.length > 0) {
       return { status: 200, data: isNotifications };
     }
+    return { status: 401, data: {} };
   } catch (error) {
-    return { status: 400, data: {} };
+    return { status: 500, data: {} };
   }
 };

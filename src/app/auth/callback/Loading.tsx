@@ -1,5 +1,5 @@
 import React from 'react'
-import Spinner from '@/components/ui/global/Spinner'
+import Spinner from '@/components/global/Spinner'
 const Loading = () => {
   const Colordsdfkcj = "";
   return (

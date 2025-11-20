@@ -12,6 +12,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import ReactQueryProvider from "@/React-Query/index";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
           {/* <ThemeProvider
             attribute="class"
             defaultTheme="dark"
@@ -44,7 +47,7 @@ export default function RootLayout({
             disableTransitionOnChange>
             
           </ThemeProvider> */}
-          {children}
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </body>
       </html>
     </ClerkProvider>
