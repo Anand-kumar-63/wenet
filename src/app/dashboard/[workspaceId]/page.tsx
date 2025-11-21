@@ -5,9 +5,10 @@ const page = () => {
   return (
     <div className='w-screen h-screen flex justify-center items-center'>
       <div className='w-screen h-screen flex items-start'>
-       <WorkspaceSideBar workspaceId={"scb"}/>
+       
       </div>
       {/* <div>hey</div> */}
+      hey
     </div>
   )
 }

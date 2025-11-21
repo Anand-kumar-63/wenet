@@ -1,8 +1,6 @@
+"use server";
 import { currentUser } from "@clerk/nextjs/server";
 import { PrismaClient } from "@prisma/client";
-import { count } from "console";
-import { is } from "date-fns/locale";
-import { CarTaxiFront, Slice } from "lucide-react";
 type workspaceprops = {
   workspaceId: string;
 };
@@ -40,9 +38,13 @@ export const allowaccessworkspace = async ({ workspaceId }: workspaceprops) => {
           workspace: workspace,
         },
       };
-    return { status: 200, message: "access allowed", workspace: workspace };
+    return {
+      status: 200,
+      message: "access allowed",
+      data: { workspace: workspace },
+    };
   } catch (error) {
-    return { status: 401, data: { workspace: null } };
+    return { status: 500, data: { workspace: null } };
   }
 };
 export const getworkspacefolders = async (workspaceId: string) => {
