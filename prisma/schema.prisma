@@ -9,6 +9,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  // url = env("DATABASE_URL")
 }
 
 model User {
@@ -94,7 +95,10 @@ model Folder {
   workspaceId String?    @db.Uuid
   videos      Video[]
 }
-
+enum Subscription_Plan {
+  FREE
+  PRO
+}
 model Subscription {
   Id         String            @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
   userId     String?           @unique @db.Uuid
@@ -105,10 +109,7 @@ model Subscription {
   CustomerId String?           @unique
 }
 
-enum Subscription_Plan {
-  FREE
-  PRO
-}
+
 
 model Member {
   Id          String     @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid

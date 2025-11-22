@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { PlusCircle } from "lucide-react";
 type sidebarprops = {
   workspaceId: string;
 };
+import Modal from "../model";
 import { QueryData } from "@/hooks/querydata";
 import { getworkspace } from "@/actions/workspace";
 import {
@@ -55,8 +57,8 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
         onValueChange={OnchangeActiveworkspace}
       >
         {/* Fixed mt-25 to mt-24 */}
-        <SelectTrigger className="rounded-xl w-[160px] text-white border-1 mt-25 border-white data-[placeholder]:text-gray-200">
-          <SelectValue placeholder="Select a fruit" />
+        <SelectTrigger className="rounded-xl w-[160px] text-neutral-300 border-1 mt-25 border-white data-[placeholder]:text-gray-200">
+          <SelectValue placeholder="Select a fruit"></SelectValue>
         </SelectTrigger>
 
         {/* Added specific background color to ensure visibility */}
@@ -93,6 +95,19 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
           </SelectGroup>
         </SelectContent>
       </Select>
+      <Modal
+        title="Invite to the Workspace"
+        description="Join my workspace to work on similar projects"
+        trigger={
+          <span className="text-gray-200  text-sm flex flex-row justify-center items-center hover:bg-gray-600 px-7 py-1 rounded-sm gap-2">
+            <span>workspaces</span>
+            <PlusCircle className="h-4 w-4" />
+          </span>
+        }
+        children={<span>
+          workspaces
+        </span>}
+      />
     </div>
   );
 }

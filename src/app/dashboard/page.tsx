@@ -1,5 +1,5 @@
 import React from 'react'
-import onauthentication from '@/actions/user';
+import { onauthentication } from '@/actions/user';
 import { redirect } from 'next/navigation';
 type props = {}
 const dashboardpage = async (props:props) => {
