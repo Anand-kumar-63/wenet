@@ -34,13 +34,13 @@ export const useSearch = (type: "USERS", key: string) => {
   }, [query]);
   const { refetch, isFetched } = QueryData(
     [key, debounce],
-    async ({ querykey }) => {
+    async ({queryKey }) => {
       if (type === "USERS") {
-        const Users = await searchUser(querykey[1] as string);
-        if (Users?.status === 200) setonuser(Users.data);
+        const Users = await searchUser(queryKey[1] as string);
+        if (Users?.status === 200) setonuser(Users.data?null:[])
       }
-      false;
-    }
+    },
+    false
   );
   useEffect(() => {
     if (debounce) refetch();
@@ -49,4 +49,5 @@ export const useSearch = (type: "USERS", key: string) => {
       debounce;
     };
   });
+  return { isFetched , onuser , onSearchQuery , query }
 };
