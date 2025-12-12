@@ -1,22 +1,21 @@
-
 import React from "react";
 import Spinner from "./Spinner";
 import { cn } from "@/lib/utils";
 
 interface loaderprops {
-  state: string;
-  Children: React.ReactNode;
-  Color: string;
-  classname: string;
+  state: boolean;
+  children: React.ReactNode;
+  Color?: string;
+  classname?: string;
 }
 
-const Loader = ({ state, Children, Color, classname }: loaderprops) => {
+const Loader = ({ state, children, Color, classname }: loaderprops) => {
   return state ? (
     <div className={cn(classname)}>
-      <Spinner color={Color}/>
+      <Spinner color={Color} />
     </div>
   ) : (
-    Children
+    children
   );
 };
 

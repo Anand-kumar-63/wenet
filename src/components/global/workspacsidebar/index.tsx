@@ -17,12 +17,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Search from "../search/search";
 import { Separator } from "@radix-ui/react-separator";
 import { workspaceProps } from "@/types/workspace.type";
-
 export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
   const router = useRouter();
-
   const DUMMY_DATA = {
     workspaces: [
       { id: "ws-1", name: "Personal Workspace", type: "personal" },
@@ -38,11 +37,13 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       },
     ],
   };
-
-  const { data, isFetched } = QueryData(["user-workspace"], getworkspace);
-  // console.log(data);
-  const { data: workspace1 } = data as workspaceProps;
   const workspace = DUMMY_DATA;
+  const { data, isFetched } = QueryData(["user-workspace"], getworkspace);
+  const { data: workspace1 } = data as workspaceProps;
+  const currentworkspace = workspace1.workspaces.find(
+    (s) => s.id === workspaceId
+  );
+  // on Changing the active workspace push the url to the dashboard/id
   const OnchangeActiveworkspace = (value: string) => {
     return router.push(`/dashboard/${value}`);
   };
@@ -95,19 +96,20 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Modal
-        title="Invite to the Workspace"
-        description="Join my workspace to work on similar projects"
-        trigger={
-          <span className="text-gray-200  text-sm flex flex-row justify-center items-center hover:bg-gray-600 px-7 py-1 rounded-sm gap-2">
-            <span>workspaces</span>
-            <PlusCircle className="h-4 w-4" />
-          </span>
-        }
-        children={<span>
-          workspaces
-        </span>}
-      />
+      {currentworkspace?.type === "PUBLIC" && (
+        <Modal
+          title="Invite to the Workspace"
+          description="Join my workspace to work on similar projects"
+          trigger={
+            <span className="text-gray-200  text-sm flex flex-row justify-center items-center hover:bg-gray-600 px-7 py-1 rounded-sm gap-2">
+              <span>workspaces</span>
+              <PlusCircle className="h-4 w-4" />
+            </span>
+          }
+        >
+          <Search workspaceId={workspaceId} />
+        </Modal>
+      )}
     </div>
   );
 }

@@ -31,5 +31,4 @@ const Modal = ({ trigger, children, title, description, classname }: props) => {
     </Dialog>
   );
 };
-
 export default Modal;

@@ -123,7 +123,7 @@ export const getworkspace = async () => {
     return { status: 401 };
   }
   try {
-    const isWorkspace = await prismaclient.user.findMany({
+    const Workspace = await prismaclient.user.findMany({
       where: {
         clerkId: user.id,
       },
@@ -153,10 +153,10 @@ export const getworkspace = async () => {
         },
       },
     });
-    if (!isWorkspace) {
+    if (!Workspace) {
       return { status: 401, data: {} };
     }
-    return { status: 200, data: isWorkspace };
+    return { status: 200, data: Workspace };
   } catch (error) {
     return { status: 500, data: {} };
   }

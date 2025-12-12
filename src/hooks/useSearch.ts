@@ -8,8 +8,8 @@ export const useSearch = (type: "USERS", key: string) => {
   const [query, setquery] = useState("");
   const [debounce, setdebounce] = useState("");
   const [onuser, setonuser] = useState<
-     {
-        Id: string;
+     {  
+      Id: string;
         Subscription: {
           plan:Subscription_Plan
         };
@@ -30,9 +30,9 @@ export const useSearch = (type: "USERS", key: string) => {
     }, 1000);
     return () => {
       clearTimeout(delayinputtimerId);
-    };
+    }; 
   }, [query]);
-  const { refetch, isFetched } = QueryData(
+  const { refetch, isFetched , isFetching } = QueryData(
     [key, debounce],
     async ({queryKey }) => {
       if (type === "USERS") {
@@ -49,5 +49,5 @@ export const useSearch = (type: "USERS", key: string) => {
       debounce;
     };
   });
-  return { isFetched , onuser , onSearchQuery , query }
+  return { isFetching , onuser , onSearchQuery , query }
 };

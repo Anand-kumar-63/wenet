@@ -1,5 +1,5 @@
 import React from "react";
-const Spinner = ({ color }: { color: string }) => {
+const Spinner = ({ color }: { color?: string }) => {
   return (
     <div>
       <svg
