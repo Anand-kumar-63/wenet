@@ -22,6 +22,7 @@ import { Separator } from "@radix-ui/react-separator";
 import { workspaceProps } from "@/types/workspace.type";
 export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
   const router = useRouter();
+
   const DUMMY_DATA = {
     workspaces: [
       { id: "ws-1", name: "Personal Workspace", type: "personal" },
@@ -37,12 +38,15 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       },
     ],
   };
+
   const workspace = DUMMY_DATA;
   const { data, isFetched } = QueryData(["user-workspace"], getworkspace);
   const { data: workspace1 } = data as workspaceProps;
-  const currentworkspace = workspace1.workspaces.find(
-    (s) => s.id === workspaceId
-  );
+
+  // const currentworkspace = workspace1.workspaces.find(
+  //   (s) => s.id === workspaceId
+  // );
+
   // on Changing the active workspace push the url to the dashboard/id
   const OnchangeActiveworkspace = (value: string) => {
     return router.push(`/dashboard/${value}`);
@@ -96,8 +100,9 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
           </SelectGroup>
         </SelectContent>
       </Select>
-      {currentworkspace?.type === "PUBLIC" && (
-        <Modal
+      {/* {currentworkspace?.type === "PUBLIC" && ( */}
+        <Modal 
+        classname="border-1 rounded-2"
           title="Invite to the Workspace"
           description="Join my workspace to work on similar projects"
           trigger={
@@ -109,7 +114,8 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
         >
           <Search workspaceId={workspaceId} />
         </Modal>
-      )}
+      {/* )} */}
+      <div className="text-white text-md mr-30">Menu</div>      
     </div>
   );
 }

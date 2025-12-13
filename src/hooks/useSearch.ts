@@ -32,7 +32,7 @@ export const useSearch = (type: "USERS", key: string) => {
       clearTimeout(delayinputtimerId);
     }; 
   }, [query]);
-  const { refetch, isFetched , isFetching } = QueryData(
+  const { refetch , isFetched , isFetching } = QueryData(
     [key, debounce],
     async ({queryKey }) => {
       if (type === "USERS") {

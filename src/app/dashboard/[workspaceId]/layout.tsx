@@ -20,9 +20,10 @@ type layoutprops = {
   params: { workspaceId: string };
   children: React.ReactNode;
 };
-// layout content bydefault get cached in nextjs
+
+// layout content bydefault get cached in nextjs app directory 
 const layout = async ({ children, params }: layoutprops) => {
-  const {workspaceId} = await params;
+  const  { workspaceId } = await params;
   const auth = await onauthentication();
   if (!auth?.user?.workspaces || !auth?.user?.workspaces.length) {
     return redirect("/auth/sign-in");
