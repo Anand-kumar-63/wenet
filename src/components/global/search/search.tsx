@@ -21,7 +21,7 @@ const Search = ({ workspaceId }: props) => {
       <input
         onChange={onSearchQuery}
         value={query}
-        placeholder="search for the user...."
+        placeholder="search for the User"
         className="bg-transparent border-2 outline-none rounded-xl px-2 text-sm py-2"
         type="text"
       />
