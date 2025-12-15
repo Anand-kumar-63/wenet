@@ -1,16 +1,26 @@
-import React from 'react'
-import WorkspaceSideBar from '@/components/global/workspacsidebar'
-
-const page = () => {
+import React from "react";
+import WorkspaceSideBar from "@/components/global/workspacsidebar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+type props = {
+  params: { workspaceId: String };
+};
+const page = ({ params }: props) => {
   return (
-    <div className='w-screen h-screen flex justify-center items-center'>
-      <div className='w-screen h-screen flex items-start'>
-       
-      </div>
-      {/* <div>hey</div> */}
-      hey
-    </div>
-  )
-}
+    <div>
+      <Tabs defaultValue="Videos" className="mt-6">
+        <div className="flex w-full justify-between items-center">
+          <TabsList className="bg-transparent gap-2">
+            <TabsTrigger className="p-[13px] px-6 text-gray-300 rounded-full data-[state=active]:bg-[#252525]" value="Videos">Videos</TabsTrigger>
+            <TabsTrigger value="Archive" className="p-[13px] px-6 py-1 text-gray-300 rounded-full data-[state=active]:bg-[#252525]">Archive</TabsTrigger>
+          </TabsList>
 
-export default page
+          <div className="flex">
+            {/* create workspace */}
+          </div>
+        </div>
+        <TabsContent value="account">hey</TabsContent>
+      </Tabs>
+    </div>
+  );
+};
+export default page;

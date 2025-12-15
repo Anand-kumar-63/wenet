@@ -139,7 +139,8 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
             <span>workspaces</span>
             <PlusCircle className="h-4 w-4" />
           </span>
-        }>
+        }
+      >
         <Search workspaceId={workspaceId} />
       </Modal>
       <Separator className="my-4" />
@@ -230,10 +231,11 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       )}
     </div>
   );
+
   return (
-    <div className="w-full relative">
+    <div className="w-auto relative">
       {/* infobar */}
-      <div className="w-17/18 absolute left-20">
+      <div className="w-[1500px] absolute left-0">
         <Infobar />
       </div>
       {/*Sheet desktop and mobile */}
