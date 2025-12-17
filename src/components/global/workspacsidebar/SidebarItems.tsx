@@ -3,12 +3,12 @@ import Link from "next/link";
 import { Url } from "next/dist/shared/lib/router/router";
 import { cn } from "@/lib/utils";
 type SidebarItemprops = {
-  title: String;
+  title: string;
   href: Url;
   Icon: React.ReactNode;
-  Selected: Boolean;
+  Selected: boolean;
   notifications?: number;
-  Key?:Key
+  Key:number
 };
 const Sidebaritems = ({
   title,

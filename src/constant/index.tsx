@@ -5,11 +5,31 @@ import { SettingsIcon } from "lucide-react";
 import React from "react";
 const MENU_ITEMS = (
   workspaceId: string
-): { title: string; href: string; icon:React.ReactNode}[] => [
-  { title: "My Library", href: `/dashboard/${workspaceId}/Mylibrary` , icon:<Library/> },
-  { title: "Notifications", href: `/dashboard/${workspaceId}/Mylibrary`, icon:<MessageSquareDot/> },
-  { title: "Billing", href: `/dashboard/${workspaceId}/Mylibrary`,icon:<ReceiptText/> },
-  { title: "Settings", href: `/dashboard/${workspaceId}/Mylibrary`,icon:<SettingsIcon/> },
+): { title: string; href: string; icon: React.ReactNode; id:number }[] => [
+  {
+    title: "My Library",
+    href: `/dashboard/${workspaceId}/Mylibrary`,
+    icon: <Library />,
+    id:1,
+  },
+  {
+    title: "Notifications",
+    href: `/dashboard/${workspaceId}/Mylibrary`,
+    icon: <MessageSquareDot />,
+    id:2,
+  },
+  {
+    title: "Billing",
+    href: `/dashboard/${workspaceId}/Mylibrary`,
+    icon: <ReceiptText />,
+    id:3,
+  },
+  {
+    title: "Settings",
+    href: `/dashboard/${workspaceId}/Mylibrary`,
+    icon: <SettingsIcon />,
+    id:4,
+  },
 ];
 
 export default MENU_ITEMS;

@@ -41,6 +41,7 @@ import { usernotificationtype } from "@/types/notification.type";
 import Notificationplaceholder from "./Notificationplaceholder";
 import GlobalCard from "../Global-card";
 import { Button } from "@/components/ui/button";
+import { ItemMedia } from "@/components/ui/item";
 
 export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
   const router = useRouter();
@@ -107,7 +108,6 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
                 </SelectItem>
               );
             })}
-
             {workspace.members.length > 0 && (
               <>
                 <SelectLabel className="text-gray-400 mt-2">Shared</SelectLabel>
@@ -128,7 +128,6 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
           </SelectGroup>
         </SelectContent>
       </Select>
-
       {/* {currentworkspace?.type === "PUBLIC" && ( */}
       <Modal
         classname="border-1 rounded-2 p-2 border-white text-white"
@@ -147,13 +146,14 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       {/* )} */}
       <p className="text-[#9D9D9D] text-sm mt-4 font-sans">Menu </p>
       <nav>
-        {menuitems.map((item) => {
+        {menuitems.map((item , index) => {
           return (
             <ul>
               <Sidebaritems
                 title={item.title}
                 href={item.title}
                 Icon={item.icon}
+                key={index}
                 Selected={pathname == item.href}
                 notifications={
                   (item.title == "notifications" &&
@@ -161,6 +161,7 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
                     count._count.notification) ||
                   0
                 }
+                
               />
             </ul>
           );

@@ -5,8 +5,9 @@ type props = {
   workspaceId: String;
 };
 const Createworkspace = ({ workspaceId }: props) => {
-  const { data } = QueryData(["user-workspace"], getworkspace);
-  //  to get the information of the plan of the current clerk user
+  const { data } = QueryData(["user-workspace"], 
+  getworkspace);
+  //To Get the Information of the plan of the current   clerk user
   const { data: plan } = data as {
     status: number;
     data: {
@@ -15,7 +16,6 @@ const Createworkspace = ({ workspaceId }: props) => {
       };
     };
   };
-  return <div>index</div>;
+    return <div>index</div>;
 };
-
 export default Createworkspace;

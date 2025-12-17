@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
 import { Video } from "lucide-react";
-type props = {};
-const Infobar = ({}: props) => {
+
+
+
+const Infobar = () => {
   return (
     <header className="pl-20 md:pl-[600px] p-2 w-screen mt-2 flex justify-between items-center gap-2">
       <div className="flex justify-center items-center gap-2 w-full max-w-lg rounded-full border-2 text-[#d3d3d3]">
