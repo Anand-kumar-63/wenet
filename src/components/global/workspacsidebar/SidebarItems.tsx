@@ -8,7 +8,7 @@ type SidebarItemprops = {
   Icon: React.ReactNode;
   Selected: boolean;
   notifications?: number;
-  Key:number
+  Key:string
 };
 const Sidebaritems = ({
   title,

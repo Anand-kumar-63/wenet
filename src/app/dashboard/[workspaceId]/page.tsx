@@ -1,10 +1,12 @@
 import React from "react";
 import WorkspaceSideBar from "@/components/global/workspacsidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Createworkspace from "@/components/global/Create-workspace";
 type props = {
-  params: { workspaceId: String };
+  params: { workspaceId: string };
 };
 const page = ({ params }: props) => {
+  const {workspaceId} = params;
   return (
     <div>
       <Tabs defaultValue="Videos" className="mt-6">
@@ -15,7 +17,7 @@ const page = ({ params }: props) => {
           </TabsList>
 
           <div className="flex">
-            {/* create workspace */}
+            <Createworkspace workspaceId={workspaceId}/>
           </div>
         </div>
         <TabsContent value="account">hey</TabsContent>

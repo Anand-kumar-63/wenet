@@ -91,6 +91,7 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
         defaultValue={workspaceId}
         onValueChange={OnchangeActiveworkspace}
       >
+      
         {/* Fixed mt-25 to mt-24 */}
         <SelectTrigger className="rounded-xl w-[160px] text-neutral-300 border-1 mt-25 border-white data-[placeholder]:text-gray-200">
           <SelectValue placeholder="Select a fruit"></SelectValue>
@@ -146,14 +147,14 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       {/* )} */}
       <p className="text-[#9D9D9D] text-sm mt-4 font-sans">Menu </p>
       <nav>
-        {menuitems.map((item , index) => {
-          return (
-            <ul>
+        <ul>
+          {menuitems.map((item, index) => {
+            return (
               <Sidebaritems
                 title={item.title}
                 href={item.title}
                 Icon={item.icon}
-                key={index}
+                Key={item.id}
                 Selected={pathname == item.href}
                 notifications={
                   (item.title == "notifications" &&
@@ -161,13 +162,11 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
                     count._count.notification) ||
                   0
                 }
-                
               />
-            </ul>
-          );
-        })}
+            );
+          })}
+        </ul>
       </nav>
-
       <Separator />
       <p className="text-[#9D9D9D] font-bold text-sm">Workspaces</p>
       {/* // if the user have only one Workspace and the subscription is free or paid   */}
