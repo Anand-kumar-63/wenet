@@ -1,6 +1,7 @@
 "use server";
-import { currentUser } from "@clerk/nextjs/server";
+import { Client, currentUser } from "@clerk/nextjs/server";
 import { PrismaClient } from "@prisma/client";
+import { create } from "domain";
 type workspaceprops = {
   workspaceId: string;
 };
@@ -187,5 +188,48 @@ export const getNotifications = async () => {
     return { status: 401, data: {} };
   } catch (error) {
     return { status: 500, data: {} };
+  }
+};
+
+export const createworkspace = async (name: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 401, message: "UnAuthorised" };
+  }
+  try {
+    const existinguser = await prismaclient.user.findUnique({
+      where: {
+        clerkId: user.id,
+      },
+      select: {
+        Subscription: {
+          select: {
+            plan: true,
+          },
+        },
+      },
+    });
+    if (existinguser?.Subscription?.plan === "PRO") {
+      const workspace = await prismaclient.user.update({
+        where: {
+          clerkId: user.id,
+        },
+        data: {
+          workspaces: {
+            create: {
+              name,
+              type: "PERSONAL",
+            },
+          },
+        },
+      });
+
+      if (workspace) {
+        return { status: 200, data: workspace };
+      }
+    }
+    return { status: 400, data: {} };
+  } catch (error) {
+    return { status: 400, data: {} };
   }
 };

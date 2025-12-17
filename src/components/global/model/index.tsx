@@ -6,7 +6,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogClose,
-  DialogOverlay
+  DialogOverlay,
 } from "@/components/ui/dialog";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 type props = {
@@ -22,7 +22,7 @@ const Modal = ({ trigger, children, title, description, classname }: props) => {
       <DialogTrigger className={classname} asChild>
         {trigger}
       </DialogTrigger>
-      <DialogOverlay className="fixed inset-0 bg-blackA6 data-[state=open]:animate-overlayShow"/>
+      <DialogOverlay className="fixed inset-0 bg-blackA6 data-[state=open]:animate-overlayShow" />
       <DialogContent className="bg-gray-800 text-gray-200">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
@@ -30,6 +30,7 @@ const Modal = ({ trigger, children, title, description, classname }: props) => {
         </DialogHeader>
         {children}
       </DialogContent>
+      <DialogClose className="focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none" />
     </Dialog>
   );
 };
