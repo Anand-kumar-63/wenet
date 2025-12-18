@@ -191,6 +191,7 @@ export const getNotifications = async () => {
   }
 };
 
+// create workspace when clicked the button createtheworkspace
 export const createworkspace = async (name: string) => {
   const user = await currentUser();
   if (!user) {
@@ -199,6 +200,7 @@ export const createworkspace = async (name: string) => {
   try {
     const existinguser = await prismaclient.user.findUnique({
       where: {
+
         clerkId: user.id,
       },
       select: {
