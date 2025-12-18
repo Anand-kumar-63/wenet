@@ -10,7 +10,7 @@ type FormProps = {
   options?: { value: string; label: string; id: string }[];
   placeholder: string;
   name: string;
-  errors: FieldErrors<FieldValues>;
+  errors?: FieldErrors<FieldValues>;
   Lines?: number;
   cols?: number;
 };
@@ -92,7 +92,9 @@ const FormGenerator = ({
             errors={errors}
             name={name}
             render={({ message }) => (
-              <p className="text-red-400 mt-2">{message === "required" ? "" : message}</p>
+              <p className="text-red-400 mt-2">
+                {message === "required" ? "" : message}
+              </p>
             )}
           ></ErrorMessage>
         </Label>
@@ -108,18 +110,22 @@ const FormGenerator = ({
             // cols={cols}
             placeholder={placeholder}
             className="bg-transparent border-themeGray text-themeTextGray"
-            // register it later 
+            // register it later
           ></textarea>
 
           <ErrorMessage
             errors={errors}
             name={name}
             render={({ message }) => (
-              <p className="text-red-400 mt-2">{message === "required" ? "" : message}</p>
+              <p className="text-red-400 mt-2">
+                {message === "required" ? "" : message}
+              </p>
             )}
           ></ErrorMessage>
         </Label>
       );
+    default:
+      break;
   }
 };
 export default FormGenerator;

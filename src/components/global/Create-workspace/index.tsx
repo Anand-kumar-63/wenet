@@ -6,7 +6,7 @@ import Modal from "../model";
 import { FolderPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Createworkspaceform from "@/components/Forms/create-workspace";
+import Createworkspaceform from "@/components/Forms/workspace-form";
 type props = {
   workspaceId: string;
 };
