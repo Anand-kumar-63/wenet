@@ -77,7 +77,7 @@ const Createworkspace = ({ workspaceId }: props) => {
             Create workspace
           </Button>
 
-          <Createworkspaceform />
+          {/* <Createworkspaceform /> */}
         </div>
       </Modal>
     );
