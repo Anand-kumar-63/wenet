@@ -6,12 +6,10 @@ generator client {
   provider = "prisma-client-js"
   // output   = "../src/generated/prisma"
 }
-
 datasource db {
   provider = "postgresql"
   // url = env("DATABASE_URL")
 }
-
 model User {
   Id           String         @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
   email        String         @unique
@@ -31,22 +29,20 @@ model User {
   Reciever     Invite[]       @relation("Reciever")
   trial        Boolean        @default(false)
 }
-
 enum PRESET {
-  HD
-  SD
+  HD // high definition 
+  SD // standard definition
 }
-
 model Media {
   mediaId String  @id @default(dbgenerated("gen_random_Uuid()")) @db.Uuid
   Screen  String?
   mic     String?
   camera  String?
-  preset  PRESET  @default(SD)
+  preset  PRESET  @default(SD) // this will allow users to select between the high definition and low defintion
   userId  String? @unique @db.Uuid
   user    User?   @relation(fields: [userId], references: [Id])
 }
-
+ 
 enum Type {
   PERSONAL
   PRIVATE
