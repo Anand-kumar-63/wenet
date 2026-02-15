@@ -56,8 +56,7 @@ const layout = async ({ children, params }: layoutprops) => {
   });
 
   return (
-    // HydrationBoundary passes server-fetched data to the browser so it doesn’t fetch again.
-    // 
+    // HydrationBoundary passes server-fetched data to the browser so it doesn’t fetch again....// 
     <HydrationBoundary state={dehydrate(query)}>
       <div className="flex h-screen w-full bg-gray-900">
         <WorkspaceSideBar workspaceId={workspaceId} />

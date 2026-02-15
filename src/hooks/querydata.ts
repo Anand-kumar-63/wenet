@@ -6,7 +6,7 @@ import {
   useQueries,
   useQuery,
 } from "@tanstack/react-query";
-export function QueryData(
+export function useQueryData(
   querykey: QueryKey,
   queryfn: QueryFunction,
   enabled?: Enabled

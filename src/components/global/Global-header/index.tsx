@@ -2,12 +2,11 @@
 import React from "react";
 import { WorkSpace } from "@prisma/client";
 import { usePathname } from "next/navigation";
-import { SourceTextModule } from "vm";
 type props = {
   workspace: WorkSpace;
 };
 const Globalheader = ({ workspace }: props) => {
-  // Split Will Give you array
+  // Split Will Give you array 
   const pathname = usePathname().split(`/dashboard/${workspace.Id}`)[1];
   return (
     <article className="flex flex-col gap-2">

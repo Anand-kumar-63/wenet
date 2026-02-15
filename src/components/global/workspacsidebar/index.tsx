@@ -9,7 +9,7 @@ type sidebarprops = {
   workspaceId: string;
 };
 import Modal from "../model";
-import { QueryData } from "@/hooks/querydata";
+import { useQueryData } from "@/hooks/useQueryData";
 import { usePathname } from "next/navigation";
 // import Seperator from "../seperator";
 import { getNotifications, getworkspace } from "@/actions/workspace";
@@ -65,14 +65,14 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
     ],
   };
   const workspace = DUMMY_DATA;
-  // data we get from the queryData is named as notification
-  const { data: notifications } = QueryData(
+  // data we get from the useQueryData is named as notification
+  const { data: notifications } = useQueryData(
     ["user-notifications"],
     getNotifications
   );
   // data we get from notification are termed as count
   const { data: count } = notifications as usernotificationtype;
-  const { data, isFetched } = QueryData(["user-workspace"], getworkspace);
+  const { data , isFetched } = useQueryData(["user-workspace"], getworkspace);
   const { data: workspace1 } = data as workspaceProps;
   // const currentworkspace = workspace1.workspaces.find(
   //   (s) => s.id === workspaceId
@@ -91,7 +91,6 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
         defaultValue={workspaceId}
         onValueChange={OnchangeActiveworkspace}
       >
-      
         {/* Fixed mt-25 to mt-24 */}
         <SelectTrigger className="rounded-xl w-[160px] text-neutral-300 border-1 mt-25 border-white data-[placeholder]:text-gray-200">
           <SelectValue placeholder="Select a fruit"></SelectValue>
@@ -148,8 +147,8 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       <p className="text-[#9D9D9D] text-sm mt-4 font-sans">Menu </p>
       <nav>
         <ul>
-          {menuitems.map((item, index) => {
-            return (
+          {menuitems.map((item , index)=>{
+            return(
               <Sidebaritems
                 title={item.title}
                 href={item.title}
@@ -231,7 +230,6 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       )}
     </div>
   );
-
   return (
     <div className="w-auto relative">
       {/* infobar */}
@@ -255,3 +253,4 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
     </div>
   );
 }
+ 

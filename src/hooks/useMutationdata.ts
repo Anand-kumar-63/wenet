@@ -23,7 +23,7 @@ export const useMutationdata =<TData , TVariables>(
     mutationFn: mutationfunction,
     onSuccess(data) {
       if (onSuccess) onSuccess(data);
-      return data;
+      console.log(data);
     },
     onSettled: async () => {
       return await client.invalidateQueries({ queryKey: [querykey] });

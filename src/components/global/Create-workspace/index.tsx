@@ -1,6 +1,6 @@
 "use client";
 import { getworkspace } from "@/actions/workspace";
-import { QueryData } from "@/hooks/querydata";
+import { useQueryData } from "@/hooks/useQueryData";
 import React from "react";
 import Modal from "../model";
 import { FolderPlus } from "lucide-react";
@@ -12,7 +12,7 @@ type props = {
 };
 // we need to get the information about the users workspace and thier members
 const Createworkspace = ({ workspaceId }: props) => {
-  const { data } = QueryData(["user-workspace"], getworkspace);
+  const { data } = useQueryData(["user-workspace"], getworkspace);
   // Note: ts assertion and type casting
   // const { data: plan } = data as {
   //   status: number;

@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useEffectEvent, useState } from "react";
-import { QueryData } from "./querydata";
+import { useQueryData } from "./useQueryData";
 import { searchUser } from "@/actions/user";
 import { Subscription_Plan } from "@prisma/client";
 // Hook is used for searching and set queries related to searching
@@ -32,7 +32,7 @@ export const useSearch = (type: "USERS", key: string) => {
       clearTimeout(delayinputtimerId);
     }; 
   }, [query]);
-  const { refetch , isFetched , isFetching } = QueryData(
+  const { refetch , isFetched , isFetching } = useQueryData(
     [key, debounce],
     async ({queryKey }) => {
       if (type === "USERS") {
