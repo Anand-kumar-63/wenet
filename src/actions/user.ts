@@ -1,56 +1,56 @@
 "use server";
 import { currentUser } from "@clerk/nextjs/server";
 import { PrismaClient } from "@prisma/client";
-
 const client = new PrismaClient();
+
 export const onauthentication = async () => {
   try {
     const user = await currentUser();
-    if (!user) {
+    if(!user){
       return { status: 400 };
     }
     const Existinguser = await client.user.findUnique({
-      where: {
+      where:{
         clerkId: user.id,
       },
-      include: {
-        workspaces: {
-          where: {
-            User: {
+      include:{
+        workspaces:{
+          where:{
+            User:{
               clerkId: user.id,
             },
           },
         },
       },
     });
-    if (Existinguser) {
+    if(Existinguser){
       return { message: "success", user: Existinguser, status: 200 };
     }
     const newUser = await client.user.create({
-      data: {
+      data:{
         clerkId: user.id,
         email: user.emailAddresses[0].emailAddress,
         firstname: user.firstName,
         lastname: user.lastName,
         image: "",
-        workspaces: {
-          create: {
+        workspaces:{
+          create:{
             name: `${user.firstName}'s workspace`,
             type: "PERSONAL",
           },
         },
-        studio: {
+        studio:{
           create: {},
         },
-        Subscription: {
-          create: {},
+        Subscription:{
+          create:{},
         },
       },
-      // you have yo include the subscription and workspace in the response object
-      include: {
-        workspaces: {
-          where: {
-            User: {
+      // You Have to Include the subscription and workspace in the response object
+      include:{
+        workspaces:{
+          where:{
+            User:{
               clerkId: user.id,
             },
           },
@@ -65,11 +65,12 @@ export const onauthentication = async () => {
     if (newUser) {
       return { message: "Succes", status: 201, user: newUser };
     }
-  } catch (error) {
-    return { status: 401 };
+  }catch(error){
+    return{ status: 401 };
   }
 };
 
+// search for the user
 export const searchUser = async (query: string) => {
   const user = await currentUser();
   if (!user) return { status: 404 };

@@ -70,11 +70,12 @@ export const getworkspacefolders = async (workspaceId: string) => {
       return { status: 200, folders: isFolders };
     }
     return { status: 400, folders: [] };
-  } catch (error) {
+  } catch (error:unknown) {
     return { status: 401, folders: [] };
   }
 };
 export const getAlluserVideos = async (workspaceId: string) => {
+  //First Findout the user from the Currentuser Object
   const user = await currentUser();
   if (!user) {
     return { status: 404 };
@@ -235,3 +236,4 @@ export const createworkspace = async (name: string) => {
     return { status: 400, data: {} };
   }
 };
+

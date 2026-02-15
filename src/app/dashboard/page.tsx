@@ -3,6 +3,7 @@ import { onauthentication } from '@/actions/user';
 import { redirect } from 'next/navigation';
 type props = {}
 const dashboardpage = async (props:props) => {
+  // We have to first Check that if the account exists or not..
   const auth = await onauthentication();
   if(auth?.status==201||auth?.status==200){
     return redirect(`/dashboard/${auth.user?.workspaces[0].Id}`)
@@ -16,4 +17,4 @@ const dashboardpage = async (props:props) => {
     </div>
   )
 }
-export default dashboardpage
+export default dashboardpage;
