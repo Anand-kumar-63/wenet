@@ -1,6 +1,6 @@
 "use client";
 import { getworkspace } from "@/actions/workspace";
-import { useQueryData } from "@/hooks/useQueryData";
+import { useQueryData } from "@/hooks/querydata";
 import React from "react";
 import Modal from "../model";
 import { FolderPlus } from "lucide-react";
@@ -13,26 +13,26 @@ type props = {
 // we need to get the information about the users workspace and thier members
 const Createworkspace = ({ workspaceId }: props) => {
   const { data } = useQueryData(["user-workspace"], getworkspace);
+  console.log(data);
   // Note: ts assertion and type casting
-  // const { data: plan } = data as {
-  //   status: number;
-  //   data: {
-  //     Subscription: {
-  //       plan: "PRO" | "FREE";
-  //     };
-  //   };
-  // };
-
-  const dummy_plan = {
-    status: 200,
+  const { data: Plan } = data as {
+    status: number;
     data: {
       Subscription: {
-        plan: "FREE",
-      },
-    },
+        plan: "PRO" | "FREE";
+      };
+    };
   };
-  const plan = dummy_plan.data;
-  if (plan.Subscription?.plan === "FREE") {
+  // const dummy_plan = {
+  //   status: 200,
+  //   data: {
+  //     Subscription: {
+  //       plan: "FREE",
+  //     },
+  //   },
+  // };
+  // const plan = dummy_plan.data;
+  if (Plan.Subscription?.plan === "FREE") {
     return (
       <Modal
         title={"Upgrade to PRO"}
@@ -50,12 +50,11 @@ const Createworkspace = ({ workspaceId }: props) => {
             Upgrade to Pro
           </Button>
         </div>
-
         <Createworkspaceform />
       </Modal>
     );
   }
-  if (plan.Subscription?.plan === "PRO") {
+  if (Plan.Subscription?.plan === "PRO") {
     return (
       <Modal
         title={"Create Workspace"}
@@ -76,7 +75,6 @@ const Createworkspace = ({ workspaceId }: props) => {
           <Button className="bg-gray-100 p-0 w-full text-black rounded-sm ">
             Create workspace
           </Button>
-
           {/* <Createworkspaceform /> */}
         </div>
       </Modal>

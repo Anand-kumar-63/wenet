@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useEffectEvent, useState } from "react";
-import { useQueryData } from "./useQueryData";
+import { useQueryData } from "./querydata";
 import { searchUser } from "@/actions/user";
 import { Subscription_Plan } from "@prisma/client";
 // Hook is used for searching and set queries related to searching

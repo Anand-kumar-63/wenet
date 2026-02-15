@@ -9,7 +9,7 @@ type sidebarprops = {
   workspaceId: string;
 };
 import Modal from "../model";
-import { useQueryData } from "@/hooks/useQueryData";
+import { useQueryData } from "@/hooks/querydata";
 import { usePathname } from "next/navigation";
 // import Seperator from "../seperator";
 import { getNotifications, getworkspace } from "@/actions/workspace";
