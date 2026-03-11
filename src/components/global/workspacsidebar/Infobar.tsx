@@ -1,6 +1,6 @@
 import React from "react";
 import { Upload } from "lucide-react";
-import { Avatar } from "@/components/ui/avatar";
+// import { Avatar } from "@/components/ui/avatar";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -31,5 +31,4 @@ const Infobar = () => {
     </header>
   );
 };
-
 export default Infobar;

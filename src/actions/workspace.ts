@@ -201,7 +201,6 @@ export const createworkspace = async (name: string) => {
   try {
     const existinguser = await prismaclient.user.findUnique({
       where: {
-
         clerkId: user.id,
       },
       select: {
@@ -226,7 +225,6 @@ export const createworkspace = async (name: string) => {
           },
         },
       });
-
       if (workspace) {
         return { status: 200, data: workspace };
       }
