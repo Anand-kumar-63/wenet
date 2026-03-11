@@ -6,7 +6,8 @@ type props = {
   workspace: WorkSpace;
 };
 const Globalheader = ({ workspace }: props) => {
-  // Split Will Give you array 
+  // Split Will Give you array                                  0      1
+  // http://localhost/dashboard/4y30r923heigfweg90u0/folder - [" " , "/folder"]
   const pathname = usePathname().split(`/dashboard/${workspace.Id}`)[1];
   return (
     <article className="flex flex-col gap-2">

@@ -21,7 +21,6 @@ const Createworkspaceform = () => {
         inputType="input"
         placeholder="Enter new Workspace name"
         name="workspace name"
-        // errors={}
       />
       <Button className="w-full text-sm mt-2" type="submit" disabled={false}>
         Create Workspace

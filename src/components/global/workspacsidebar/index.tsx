@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { PlusCircle, Sidebar } from "lucide-react";
+import { Dumbbell, PlusCircle, Sidebar } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Menu } from "lucide-react";
 import Infobar from "./Infobar";
@@ -91,16 +91,15 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
         defaultValue={workspaceId}
         onValueChange={OnchangeActiveworkspace}
       >
-        {/* Fixed mt-25 to mt-24 */}
         <SelectTrigger className="rounded-xl w-[160px] text-neutral-300 border-1 mt-25 border-white data-[placeholder]:text-gray-200">
           <SelectValue placeholder="Select a fruit"></SelectValue>
         </SelectTrigger>
-        {/* Added specific background color to ensure visibility */}
+        
         <SelectContent className="bg-gray-900 text-white border-gray-700 backdrop-blur-lg">
           <SelectGroup>
             <SelectLabel className="text-gray-400">Workspaces</SelectLabel>
             <Separator className="bg-gray-700 my-2" />
-
+            
             {workspace.workspaces.map((workspaceitem) => {
               return (
                 <SelectItem key={workspaceitem.id} value={workspaceitem.id}>
@@ -108,6 +107,7 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
                 </SelectItem>
               );
             })}
+
             {workspace.members.length > 0 && (
               <>
                 <SelectLabel className="text-gray-400 mt-2">Shared</SelectLabel>
@@ -115,6 +115,7 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
                 {workspace.members.map(
                   (member) =>
                     member.workspace && (
+
                       <SelectItem
                         key={member.workspace.id}
                         value={member.workspace.id} // FIXED: Changed name to id
@@ -168,8 +169,9 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
       </nav>
       <Separator />
       <p className="text-[#9D9D9D] font-bold text-sm">Workspaces</p>
-      {/* // if the user have only one Workspace and the subscription is free or paid   */}
-      {workspace.workspaces.length == 1 && workspace.members.length == 0 && (
+      {/*// if the user have only one Workspace and the subscription is free or paid */}
+      {
+      workspace.workspaces.length == 1 && workspace.members.length == 0 && (
         <div className="w-4/5">
           <p className="text-[#9D9D9D] font-medium text-sm">
             {workspace.Subscription.plan == "FREE"
@@ -177,7 +179,8 @@ export default function WorkspaceSideBar({ workspaceId }: sidebarprops) {
               : "Create a workspace"}
           </p>
         </div>
-      )}
+      )
+      }
       <nav className="w-full">
         <ul className="h-[150px] overflow-x-hidden overflow-auto fade-layer">
           {/* // these first renders is the workspaces that the user owns but not the personal workspaces... */}

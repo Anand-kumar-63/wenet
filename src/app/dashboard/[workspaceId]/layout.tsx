@@ -25,6 +25,7 @@ type layoutprops = {
 // layout content bydefault get cached in nextjs app directory 
 const layout = async ({ children, params }: layoutprops) => {
   const  { workspaceId } = await params;
+  console.log(workspaceId);
   const auth = await onauthentication();
   if (!auth?.user?.workspaces || !auth?.user?.workspaces.length) {
     return redirect("/auth/sign-in");

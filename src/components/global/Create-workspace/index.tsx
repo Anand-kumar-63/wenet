@@ -12,28 +12,32 @@ type props = {
 };
 // we need to get the information about the users workspace and thier members
 const Createworkspace = ({ workspaceId }: props) => {
-  const { data } = useQueryData(["user-workspace"], getworkspace);
-  console.log(data);
+  const { data, isPending } = useQueryData(["user-workspace"], getworkspace);
+  // console.log(data);
   // Note: ts assertion and type casting
-  const { data: Plan } = data as {
-    status: number;
-    data: {
-      Subscription: {
-        plan: "PRO" | "FREE";
+  if(!isPending){
+    const { data: plan } = data as{
+      status: number;
+      data:{
+        Subscription: {
+          plan: "PRO" | "FREE";
+        };
       };
     };
+    console.log(plan.Subscription.plan);
+  }
+  const dummy_plan = {
+    status: 200,
+    data: {
+      Subscription: {
+        plan: "FREE",
+      },
+    },
   };
-  // const dummy_plan = {
-  //   status: 200,
-  //   data: {
-  //     Subscription: {
-  //       plan: "FREE",
-  //     },
-  //   },
-  // };
-  // const plan = dummy_plan.data;
-  if (Plan.Subscription?.plan === "FREE") {
-    return (
+  const Plan = dummy_plan.data;
+  // console.log(Plan.Subscription.plan);   
+  if(Plan.Subscription?.plan === "FREE"){
+    return(
       <Modal
         title={"Upgrade to PRO"}
         description="If you a free user if you want to create a workspace 
@@ -54,7 +58,7 @@ const Createworkspace = ({ workspaceId }: props) => {
       </Modal>
     );
   }
-  if (Plan.Subscription?.plan === "PRO") {
+  if(Plan.Subscription?.plan === "PRO"){
     return (
       <Modal
         title={"Create Workspace"}

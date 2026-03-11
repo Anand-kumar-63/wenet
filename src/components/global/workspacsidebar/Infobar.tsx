@@ -6,9 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
 import { Video } from "lucide-react";
-
-
-
 const Infobar = () => {
   return (
     <header className="pl-20 md:pl-[600px] p-2 w-screen mt-2 flex justify-between items-center gap-2">
